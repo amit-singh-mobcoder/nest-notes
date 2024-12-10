@@ -44,3 +44,23 @@ async function bootstrap() {
 bootstrap();
 
 ```
+### Step 3: Hint
+```javascript
+// if you want to use on router handler directly, then it is also possible
+@Controller()
+export class AppController {
+  constructor(private readonly appService: AppService) {}
+
+  @Get()
+  @UseFilters(GlobalExceptionFilter) 
+  getHello(): string {
+    return this.appService.getHello();
+  }
+}
+
+// if you are using like this, then we have no need to change main.ts file
+
+/**
+ Prefer applying filters by using classes instead of instances when possible. It reduces memory usage since Nest can easily reuse instances of the same class across your entire module.
+*/
+```
